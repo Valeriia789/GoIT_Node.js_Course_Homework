@@ -1,29 +1,21 @@
-const fs = require('fs').promises;
-const path = require("path");
+// require('./db/index.js')
+const db = require('./db')
 
-const contactsPath = path.join(__dirname, "./db/contacts.json");
-
-// працює:
-function listContacts() {
-  fs.readFile(contactsPath, "utf8")
-  .then((data) => console.log(data.toString()))
-  .catch(err => console.log(err.message));
+async function invokeAction(action,) {
+  switch (action) {
+    case 'list':
+      const contacts = await db.getContacts()
+      console.table(contacts)
+      break;
+  
+    case 'add':
+      
+    default:
+      throw new Error(`Unknown action: ${action}`);
+  }
 }
-listContacts()
 
-module.exports = {
-  listContacts,
-};
+invokeAction('list')
 
 
-// function getContactById(contactId) {
-//   // ...твій код
-// }
 
-// function removeContact(contactId) {
-//   // ...твій код
-// }
-
-// function addContact(name, email, phone) {
-//   // ...твій код
-// }
