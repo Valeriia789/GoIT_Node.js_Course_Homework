@@ -20,7 +20,18 @@ async function listContacts() {
 
 // }
 
+async function addContact(name, email, phone) {
+  const id = nanoid();
+  const contact = { id, name };
+  const contacts = await getContacts();
+  contacts.push(contact);
+  await fs.writeFile(contactsPath, JSON.stringify(contacts));
+
+  return contact;
+}
+
 async function removeContact(id) {
+  console.log('removeContact' + id);
   const dbContacts = await getContacts();
   const contact = dbContacts.find((item) => item.id === id);
 
@@ -29,16 +40,6 @@ async function removeContact(id) {
   }
 
   const contacts = dbContacts.filter((item) => item.id !== id);
-  await fs.writeFile(contactsPath, JSON.stringify(contacts));
-
-  return contact;
-}
-
-async function addContact(name, email, phone) {
-  const id = nanoid();
-  const contact = { id, name };
-  const contacts = await getContacts();
-  contacts.push(contact);
   await fs.writeFile(contactsPath, JSON.stringify(contacts));
 
   return contact;

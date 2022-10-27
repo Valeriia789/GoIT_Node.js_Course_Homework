@@ -1,6 +1,9 @@
 // nmp init -y   - створить файл package.json
 // npm install --save-dev nodemon  (урок 1, 1:45)
 
+// node contacts.js list
+// node contacts.js ls --limit 2
+
 // // ------------file index.js-------------------
 
 // const fs = require("fs");
